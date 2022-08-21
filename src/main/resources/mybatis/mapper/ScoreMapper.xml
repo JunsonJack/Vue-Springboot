@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.home.student.mapper.ScoreMapper">
+
+    <select id="queryList" resultType="com.home.student.bean.vo.ScoreVO">
+        select a.*,
+               s.real_name studentName
+        from score a
+        left join student s on a.student_id = s.id
+        <where>
+            <if test='searchWord != null and searchWord != ""'>
+                s.real_name like concat('%',#{searchWord},'%')
+            </if>
+        </where>
+        order by a.id desc
+
+    </select>
+
+
+
+</mapper>
